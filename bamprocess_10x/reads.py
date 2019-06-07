@@ -1,11 +1,6 @@
 # Written by Ehsan Motazedi, Wageningen UR, 27-07-2016.
 # Last Updated: 22-12-2017
 
-
-# this needs for bamprocess.py
-
-
-
 import ast
 import networkx as nx
 

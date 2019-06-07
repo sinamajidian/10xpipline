@@ -1,11 +1,6 @@
 # Written by Ehsan Motazedi, Wageningen UR, 04-11-2016.
 # Last Updated: 18-07-2018
 
-
-
-# this needs for bamprocess.py
-
-
 import copy
 import re
 import sys
