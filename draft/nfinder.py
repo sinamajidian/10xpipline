@@ -37,14 +37,16 @@ def nonNregion_extractor(seq):
                 if previous_char == 'N':
                     lastN_idx=idx-1
                     end_pos=lastN_idx+1
-                    list_tuple_pos.append((start_pos,end_pos))
+                    if end_pos-start_pos >20000 :
+                        list_tuple_pos.append((start_pos,end_pos))
+                    
+                    
     list_tuple_pos_nonN=[]
     for idx_nregion, tuple_pos in enumerate(list_tuple_pos):
         previous_tuple_pos=list_tuple_pos[idx_nregion-1]
-        #print(previous_tuple_pos[1],tuple_pos[0])
         list_tuple_pos_nonN.append((previous_tuple_pos[1],tuple_pos[0]))
-    list_tuple_pos_nonN.append((tuple_pos[1],len(seq)))
-    list_tuple_pos_nonN[0]=(1,list_tuple_pos[0][0]) #the 0 index is not correct, now ok
+    list_tuple_pos_nonN.append((tuple_pos[1],len(seq))) # last tuple
+    list_tuple_pos_nonN[0]=(1,list_tuple_pos[0][0]) # first tuple should be edited  by this line
 
     return list_tuple_pos_nonN
 
@@ -57,7 +59,7 @@ if __name__ == "__main__":
     
     list_tuple_pos_nonN=nonNregion_extractor(seq)
     
-    file_bed = open("nonNregion.bed","a") 
+    file_bed = open("nonNregion.bed","w") 
     for tuple_pos_nonN in list_tuple_pos_nonN:
         file_bed.write(str(tuple_pos_nonN[0])+'\t'+str(tuple_pos_nonN[1])+'\n')
     file_bed.close()
