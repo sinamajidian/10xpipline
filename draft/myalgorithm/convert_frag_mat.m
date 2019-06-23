@@ -95,10 +95,10 @@ for i=1:N % index for each row of the cell (file)
     end
     R(i,:)=row_num; % insert this row as the row of final matrix
 end
-R1=full(R);
+
 
 R=R(:,start_i:end);
-
+R1=full(R);
 
 
 cov=sum(abs(full(R1)));
@@ -109,7 +109,7 @@ allel_each_row=sum(abs(full(R')));
 frags_good_length_ind=find(allel_each_row>3);
 
 
-clearvars -except R  fragment_cell name_out hap_index
+% clearvars -except R  fragment_cell name_out hap_index
 save(name_out,'-v7.3')
 
 R_f=full(R);
