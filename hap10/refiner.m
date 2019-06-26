@@ -6,7 +6,7 @@ function H_final=refin(R,H)
 [K, L]=size(H); % k rows , k ploidy level
 
 H_best_upnow=H;
-KK=20;
+KK=10;
 mec_all=zeros(1,KK);
 
 mec_all(1)=mec_calculator(R,H_best_upnow);
@@ -44,38 +44,24 @@ end
 
 
 
-function mec=mec_calculator(R_matrix,H_candidate)
-
-% R {+1,-1,0}   h {1,-1}
-N=size(R_matrix,1);
-
-mec=0;
-for i=1:N
-    R_i=R_matrix(i,:);
-    [~, R_i_ind,R_i_val]=find(R_i); %[I,J,value]=find() % this is a vector so I=ones
-    H_i=H_candidate(:,R_i_ind);
-    diff=repmat(R_i_val,3,1)-H_i;
-    sm=sum(abs(diff),2)/2;
-    mec=mec+min(sm);
-end
-end
-
-
-
 
 
 
 
 function mec=mec_calculator_l(R_matrix,H_candidate,l)
+
+% column l in read matrix, l-th snp position in haplotyp.
 % R {+1,-1,0}   h {1,-1}
 %R_matrix_l=R_matrix(:,l);
+[K, L]=size(H_candidate); % K rows , K ploidy level
+
 [row_list,~,~]=find(R_matrix(:,l)); % row list that are non zero in l-th column
 mec=0;
 for i=1:length(row_list)
     R_i=R_matrix(row_list(i),:);
     [~, R_i_ind,R_i_val]=find(R_i); %[I,J,value]=find() % this is a vector so I=ones
     H_i=H_candidate(:,R_i_ind);
-    diff=repmat(R_i_val,3,1)-H_i;
+    diff=repmat(R_i_val,K,1)-H_i;
     sm=sum(abs(diff),2)/2;
     mec=mec+min(sm);
 end

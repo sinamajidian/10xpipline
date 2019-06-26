@@ -1,15 +1,7 @@
 
 function name_out=frag2mat(fragment_file)
-%clearvars
-%function [R]=convert_frag_mat(fragment_file)
-%fragment_file='data/1m_withN_1a/0/frag0_1.txt'; %'data/65a_1_20/frag20.txt'%'data/simulation1a/0/frag0.txt';;
-%name_out='data/1m_withN_1a/0/R1_tst.mat'; %'data/65a_1_20/20.mat' % 'data/simulation1a/1a_0.mat';
 
 name_out=strcat(fragment_file(1:length(fragment_file)-3),'mat');
-% hap_index= 2546:6326; %38683:39350; %  the same as in  1/p1.hap  % index starting from 1,  note that the output of sdhap starts from 0.
-% l=hap_index(end);
-% start_i=hap_index(1);
-
 
 % please check that framgent starts from first row or third row
 
@@ -104,13 +96,6 @@ R=R(:,start_i:end);
 R1=full(R);
 
 
-cov=sum(abs(full(R1)));
-[mean(cov),  min(cov)]
-allel_each_row=sum(abs(full(R')));
-[mean(allel_each_row), min(allel_each_row)]
-
-frags_good_length_ind=find(allel_each_row>3);
-
 
 % clearvars -except R  fragment_cell name_out hap_index
 save(name_out,'-v7.3')
@@ -166,9 +151,6 @@ last_index_global=0;
     first_index_global=min([first_index_global,startingPoint_num ]);
  end
 end
-
-
-
 
 
 

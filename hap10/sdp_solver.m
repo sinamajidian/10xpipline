@@ -27,11 +27,11 @@ X_init{1}=ones(N);
 
 
 OPTIONS.printlevel=1;
-OPTIONS.tol=1e-1; % best 1e-2
-OPTIONS.ADMtol=1;% best 1e-1
-OPTIONS.ADMmaxiter=200; % it seems that is not used 
-OPTIONS.maxiter=400;
-OPTIONS.AATsolve.method='iterative'; %iterative is faster thank 'direct' (default) 
+OPTIONS.tol=1e-1; % 1e-2
+OPTIONS.ADMtol=1e-1;
+%OPTIONS.ADMmaxiter=100; 
+%OPTIONS.maxiter=300;
+OPTIONS.AATsolve.method='iterative'; % 'direct' (default) 
 
 
 [obj,X,s,y,Z1,Z2,y2,v,info,runhist]=sdpnalplus(blk,At,C,b,L,[],[],[],[],OPTIONS,X_init);
