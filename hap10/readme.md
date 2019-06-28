@@ -30,7 +30,7 @@ in which k is the ploidy level.
 
 3- Install it using `./install`. During the installation you are asked to set the destination directory `<MR_directory>`.
 
-4- Download the hap10 package from [here](https://raw.githubusercontent.com/smajidian/10xpipline/master/hap10/hap10_mac) 
+4- Download the hap10 package from [here](https://github.com/smajidian/10xpipline/tree/master/hap10/hap10_mac) 
 
 5- Run the hap10 using
 
@@ -42,7 +42,7 @@ in which k is the ploidy level.
 
 
 
-The optimization core is from
+The optimization core is from [SDPNAL+](http://www.math.nus.edu.sg/~mattohkc/SDPNALplus.html)
 ```
 L.Q. Yang, D.F. Sun, and K.C. Toh, SDPNAL+: a majorized semismooth Newton-CG augmented Lagrangian method for semidefinite programming with nonnegative constraints, Mathemtical Programming Computation, 7 (2015), pp. 331-366. arXiv:1406.0942.
 ```
