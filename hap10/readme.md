@@ -5,8 +5,7 @@
  
 
 ## Installation on LINUX
-
-1. Freely download the MATLAB Runtime R2019a (9.6) for free from [here](http://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/3/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_3_glnxa64.zip)
+1. Download the MATLAB Runtime R2019a (9.6) for free from [here](http://ssd.mathworks.com/supportfiles/downloads/R2019a/Release/3/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2019a_Update_3_glnxa64.zip)
 
 2- Unzip it using `unzip MATLAB_Runtime_R2019a_Update_3_glnxa64.zip`
 
@@ -25,8 +24,7 @@ in which k is the ploidy level.
 
 
 ## Installation on  MAC
-
-1. Freely download the MATLAB Runtime R2018b (9.5) for mac  from [here](http://ssd.mathworks.com/supportfiles/downloads/R2018b/deployment_files/R2018b/installers/maci64/MCR_R2018b_maci64_installer.dmg.zip)
+1. Download the MATLAB Runtime R2018b (9.5) for free from [here](http://ssd.mathworks.com/supportfiles/downloads/R2018b/deployment_files/R2018b/installers/maci64/MCR_R2018b_maci64_installer.dmg.zip)
 
 2- Unzip it using `MCR_R2018b_maci64_installer.dmg.zip`
 
