@@ -17,7 +17,7 @@
 5- Run the hap10 using
 
 ```
-cd hap10_mac
+cd hap10_linux
 ./hap10.sh <MR_directory> </path/fragment_file.txt> k
 ```
 in which k is the ploidy level.
@@ -42,11 +42,30 @@ in which k is the ploidy level.
 
 
 
+
+
+
+
+
+
+
+
+## Compilation
+This step is not needed for running haplotype. But If you want to compile from source code you need MATLAB and also MATLAB Compiler.  
+
+Run the following on MAC
+```
+mkdir hap10
+
+mcc -m hap10.m -d hap10 -a AXfun.p frag2mat.m ops.p Atyfun.p printinfo.p Fnorm.p projSDP.p ProjPS.p matvecAAt.p psqmrNEW.p admmplus.m mec_calculator.m refiner.m  mexADM_rescale.mexmaci64 scaling.p admmplus_main_default.p mexFnorm.mexmaci64 sdp_solver.m blkprojSDP.p mexMatvec.mexmaci64 sdpnalplus.m blktrace.p mexNAL_ADMsigma_update.mexmaci64  sdpnalplus_main_default.p competaK1C1.p mexNAL_rescale.mexmaci64 smat.p competaK2C2.p mexeig.mexmaci64 solving_nal.m competaorg.p mexsmat.mexmaci64 svec.p convertdata.p mexsvec.mexmaci64 validate.p
+```
+
+
+
 The optimization core is from [SDPNAL+](http://www.math.nus.edu.sg/~mattohkc/SDPNALplus.html)
 ```
 L.Q. Yang, D.F. Sun, and K.C. Toh, SDPNAL+: a majorized semismooth Newton-CG augmented Lagrangian method for semidefinite programming with nonnegative constraints, Mathemtical Programming Computation, 7 (2015), pp. 331-366. arXiv:1406.0942.
 ```
-
 
 ## Copyright
 This version of SDPNAL+ is distributed under the Creative Commons Attribution-ShareAlike 4.0 International Public License.
