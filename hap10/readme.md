@@ -40,8 +40,12 @@ cd hap10_mac
 ```
 in which k is the ploidy level.
 
-We provide the expected output file in the folder test set.
+We provide  a test fragment file and the expected output file in the folder `data_test`. Run this on linux
 
+```
+./run_hap10.sh /mnt/scratch/majid001/installed/matlab_runtime/v96 data_test/fragment.txt  3
+
+```
 
 
 
@@ -53,11 +57,18 @@ We provide the expected output file in the folder test set.
 ## Compilation
 This step is not needed for running haplotype. But If you want to compile from source code you need MATLAB and also MATLAB Compiler.  
 
-Run the following on MAC
+Run the following on Linux
 ```
 mkdir hap10
 
 mcc -m hap10.m -d hap10 -a AXfun.p frag2mat.m ops.p Atyfun.p printinfo.p Fnorm.p projSDP.p ProjPS.p matvecAAt.p psqmrNEW.p admmplus.m mec_calculator.m refiner.m  mexADM_rescale.mexmaci64 scaling.p admmplus_main_default.p mexFnorm.mexmaci64 sdp_solver.m blkprojSDP.p mexMatvec.mexmaci64 sdpnalplus.m blktrace.p mexNAL_ADMsigma_update.mexmaci64  sdpnalplus_main_default.p competaK1C1.p mexNAL_rescale.mexmaci64 smat.p competaK2C2.p mexeig.mexmaci64 solving_nal.m competaorg.p mexsmat.mexmaci64 svec.p convertdata.p mexsvec.mexmaci64 validate.p
+```
+
+Run the following on MAC
+```
+mkdir hap10
+
+cc -m hap10.m -d hap10 -a AXfun.p ops.p Atyfun.p printinfo.p Fnorm.p projSDP.p ProjPS.p matvecAAt.p psqmrNEW.p scaling.p admmplus_main_default.p blktrace.p competaorg.p smat.p competaK2C2.p sdpnalplus_main_default.p competaK1C1.p validate.p svec.p convertdata.p blkprojSDP.p mexADM_rescale.mexa64  mexFnorm.mexa64  mexMatvec.mexa64   mexNAL_ADMsigma_update.mexa64 mexNAL_rescale.mexa64 mexeig.mexa64 mexsmat.mexa64  mexsvec.mexa64 mexeigpartial.mexa64
 ```
 
 

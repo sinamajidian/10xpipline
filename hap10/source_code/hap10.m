@@ -1,7 +1,8 @@
 
 
-function H_final=hap10(fragment_file)
-K=3;
+function H_final=hap10(fragment_file,K)
+
+K=str2num(K);
 %addpath(genpath('/mnt/LTR_userdata/majid001/software/code_matlab/SDPNAL'))
 %addpath(genpath('/Users/sina/Documents/MATLAB/SDPNAL'))
 
