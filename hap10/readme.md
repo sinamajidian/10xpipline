@@ -1,7 +1,7 @@
 
 
 
-# How to use the MATLAB code of hap10
+# How to use hap10 without paying for MATLAB
  
 
 ## Installation on LINUX
