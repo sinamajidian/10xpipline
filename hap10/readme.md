@@ -79,4 +79,4 @@ L.Q. Yang, D.F. Sun, and K.C. Toh, SDPNAL+: a majorized semismooth Newton-CG aug
 ```
 
 ## Copyright
-This version of SDPNAL+ is distributed under the Creative Commons Attribution-ShareAlike 4.0 International Public License.
+This package is distributed under the Creative Commons Attribution-ShareAlike 4.0 International Public License.
