@@ -18,7 +18,7 @@
 
 ```
 cd hap10_linux
-./hap10.sh <MR_directory> </path/fragment_file.txt> k
+./hap10.sh <MR_directory>/v96 /pathto/fragment_file.txt k
 ```
 in which k is the ploidy level.
 
@@ -36,7 +36,7 @@ in which k is the ploidy level.
 
 ```
 cd hap10_mac
-./hap10.sh <MR_directory> </path/fragment_file.txt> k
+./hap10.sh <MR_directory>/v95 /pathto/fragment_file.txt k
 ```
 in which k is the ploidy level.
 
