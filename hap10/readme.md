@@ -40,7 +40,7 @@ cd hap10_mac
 ```
 in which k is the ploidy level.
 
-
+We provide the expected output file in the folder test set.
 
 
 
