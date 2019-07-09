@@ -37,13 +37,13 @@ def bipartition_graph(W):
     mat_=D_half.dot(D-W)  
     mat=mat_.dot(D_half) # normalized laplacian
     dim_w=np.shape(W)[0]
-    print(' eigenvalues calculation is started')
+    #print(' eigenvalues calculation is started')
     if dim_w < 10000:
         eig_vals, eig_vecs = sparse.linalg.eigsh(mat,k=2,which='SM')
     else:
         initial_rand=np.random.normal(size=(dim_w, 2)) # 2 is the number of eigen vlues  check the https://github.com/lmcinnes/umap/blob/master/umap/spectral.py
         eig_vals, eig_vecs = sparse.linalg.lobpcg(mat,initial_rand, largest=False, tol=1e-8)#sparse.linalg.eigsh(mat,k=2,which='SM', tol=1e-2,maxiter=10000)
-    print(' eigenvalues are calculated ')
+    #print(' eigenvalues are calculated ')
     idx = np.argsort(eig_vals)
     second_eig=eig_vecs[:,idx[1]]
     #print(second_eig)

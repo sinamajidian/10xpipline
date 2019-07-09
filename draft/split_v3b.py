@@ -9,7 +9,10 @@ Sina Majdiain
 Start: 20 Jan
 
 """
-
+def warn(*args, **kwargs):
+    pass
+import warnings
+warnings.warn = warn
 from sys import argv
 import numpy as np
 from sklearn.cluster import MeanShift

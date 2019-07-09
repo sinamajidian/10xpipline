@@ -148,6 +148,6 @@ Usage: FragmentPoly.py -f, --fragment <fragment> -o, \
 		else:
 			os.remove(outfile.name)
 			move(writefile.name, outputfile)
-		print "%s SNPs written from %s reads." % (num_snps, num_reads)
-		print "Output successfully written to {0} fragment file.".format(outputfile)
+		print "%s SNPs written from %s reads in %s" % (num_snps, num_reads,outputfile )
+		#print "Output successfully written to {0} fragment file.".format(outputfile)
 		sys.exit()

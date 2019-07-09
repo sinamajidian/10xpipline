@@ -636,7 +636,7 @@ Comparison is not possible unless -t, --true flag is on!")
                                                 zip(*list(x[2:] for x in snps[1])))[1]
             true_phase_count, pair_phase_estim, pair_phase_true=(None,None,None)
             if n_snps==0 or n_snps==1:
-                VER[_block]=float("inf")
+                VER[_block]=n_snps#float("inf")
             else:
                 phase_true=tuple(zip(*list(x[2:] for x in snps[0])))    # Calculate the Vector Error Rate (VER)
                 phase_estim=tuple(zip(*list(x[2:] for x in snps[1])))   # VER is defined as the minimum number of preserved \
