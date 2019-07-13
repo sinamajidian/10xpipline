@@ -9,16 +9,20 @@ Recently, 10X Genomics introduced linked-read concept provided by their Chromium
 
 The haplotyping problem is NP-Hard. In recent years, several algorithms for polyploid haplotyping, namely SDhaP (Das 2015), H-PoP (Xie 2016) and cMFR (Siragusa2019), have been developed for Illumina datasets. But there is not any polyploid haplotyping algorithm for linked-read data to the best of our knowledge.
 
-Here, we have developed the first haplotyping algorithm designed for 10x linked-reads generated from a polyploid genome. We provide a general framework that paves the way for haplotyping of 10x linked-reads built on a typical Illumina haplotyping algorithm with input format of the standard fragment file.  Thus, any improvement in such algorithms may enhance our methods for 10x haplotyping. The existing Illumina haplotyping algorithm is not able to handle 10x data generated from a medium-size polyploid genome (> 50 Mbp). The proposed pre-processing makes feasible the haplotyping of chromosome scale of such genomes. We also proposed a novel optimization providing more accurate haplotypes with comparable block length.
+Here, we have developed the first haplotyping algorithm designed for 10x linked-reads generated from a polyploid genome. We provide a general framework that paves the way for haplotyping of 10x linked-reads built on a typical Illumina haplotyping algorithm with input format of the standard fragment file.  Thus, any improvement in such algorithms may enhance our methods for 10x haplotyping. The existing Illumina haplotyping algorithm is not able to handle 10x data generated from a medium-size polyploid genome. The proposed pre-processing makes feasible the haplotyping of chromosome scale of such genomes. We also proposed a novel optimization providing more accurate haplotypes with comparable block length.
 
 
 
 
 Methods
-The output of illumina device is two fastq files corresponding to two parts of paired-end reads. 
-16 bp of the first part are the barcodes. Using Longranger provided by 10x Genomics, is used for extracting barcodes and doing barcode error correction and aligning the reads. The output will be a bam file in which the barcodes are in BX tag.
 
-Then, using freebayes the single-nucleotide variants (SNV) are called. Since the heterozygous SNVs are important for haplotyping, we filtered out the homozygous variants. Then using bampocess.py, we extract the alleles of the SNV position from the reads in bam file. 
+The haplotyping pipeline is discussed here. Prior to 10x haplotyping some steps are needed. Firstly, 16bp barcodes should be removed from the first part of paired-end read and stored as a tag for each read. Since, sequencing error may occur on the barcode, an error correction scheme is needed based on the known set of barcodes. Then the reads are aligned to the reference genome by exploiting barcode information which provides a better alignment specially in repeated regions of genome. These two steps are done using Longranger package provided by 10x Genomics which results in a BAM (Binary -sequence Alignment Format) file. Subsequently, single nucleotide polymorphism (SNP) sites alongside their genotypes are called using freebayes package (Garrison 2012) and stored as a VCF (Variant Call Format) file. Since the heterozygous SNPs are only informative for haplotyping, we filtered out the homozygous variants.
+
+
+
+The input of some haplotyping algorithm is VCF and BAM
+
+Then using bampocess.py, we extract the alleles of the SNP position from the reads in bam file. 
 Then, we combine those reads with the same barcodes. Then we have a fragment file which seems to be a standard form used for haplotyping mostly for diploids. 
 
 
@@ -30,6 +34,12 @@ Unfortunately, in each bead there are 10 molecules on average which originates f
 these are far from each other,
 here we proposed a mean shift clustering approach in order to cluster parts of fragment 
 to several molecule specific fragments (mcf)
+
+
+the fastq files output of Illumina device
+The output will be a bam file in which the barcodes are in BX tag.
+
+
 
 
 
@@ -72,5 +82,4 @@ Xie 2016, H-PoP and H-PoPG- heuristic partitioning algorithms for single individ
 
 Siragusa 2019, Haplotype assembly of autotetraploid potato using integer linear programing
 
-
- sequence alignment format 
+Garrison E, Marth G. Haplotype-based variant detection from short-read sequencing. arXiv preprint arXiv:1207.3907 [q-bio.GN] 2012
