@@ -57,14 +57,14 @@ We provide  a test fragment file and the expected output file in the folder `dat
 ## Compilation
 This step is not needed for running haplotype. But If you want to compile from source code you need MATLAB and also MATLAB Compiler.  
 
-Run the following on Linux
+Run the following in MATLAB on a Linux
 ```
 mkdir hap10
 
 mcc -m hap10.m -d hap10 -a AXfun.p frag2mat.m ops.p Atyfun.p printinfo.p Fnorm.p projSDP.p ProjPS.p matvecAAt.p psqmrNEW.p admmplus.m mec_calculator.m refiner.m  mexADM_rescale.mexmaci64 scaling.p admmplus_main_default.p mexFnorm.mexmaci64 sdp_solver.m blkprojSDP.p mexMatvec.mexmaci64 sdpnalplus.m blktrace.p mexNAL_ADMsigma_update.mexmaci64  sdpnalplus_main_default.p competaK1C1.p mexNAL_rescale.mexmaci64 smat.p competaK2C2.p mexeig.mexmaci64 solving_nal.m competaorg.p mexsmat.mexmaci64 svec.p convertdata.p mexsvec.mexmaci64 validate.p
 ```
 
-Run the following on MAC
+Run the following in MATLAB on a MAC
 ```
 mkdir hap10
 
