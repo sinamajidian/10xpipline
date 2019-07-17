@@ -3,32 +3,40 @@
 %i=0;j=2;
 %fragment_file=strcat('data/5m_.001_1_cov5/',num2str(i),'/frag',num2str(i),'_',num2str(j),'.txt')
 
-function H_final=hap10(fragment_file,K)
-
+%function H_final=hap10(fragment_file,K)
+K=3;
 tic
+fragment_file= '/mnt/LTR_userdata/majid001/nobackup/5m/4_c10/hap10_2/2/frag2_1.txt'
 name_out_mat=frag2mat(fragment_file);
 
 name_hap=strcat(fragment_file(1:length(fragment_file)-3),'hap');
 load(name_out_mat)
-
-
-cov=sum(abs(full(R)));
+%cove 10
+%min_allele_row=3; 
+%min_cov=4;
 size(R)
 [N, l]=size(R);
-
+cov=sum(abs(full(R)));
 if mean(cov)>15 && N>9000
 min_allele_row=3;
 min_cov=4;
 
 else
-min_allele_row=2;
-min_cov=2;
+min_allele_row=2
+min_cov=2
 end
+
+%cov2
+%min_allele_row=2; 
+%min_cov=3;
+
+%min_allele_row=4; 
+%min_cov=3;
 
 
 [mean(cov),  min(cov)];
 allel_each_row=sum(abs(full(R)),2);
-[mean(allel_each_row), min(allel_each_row)];
+[mean(allel_each_row), min(allel_each_row)]
 
 allel_each_row=sum(abs(full(R)),2);    
 frags_good_length_ind=allel_each_row>=min_allele_row;
@@ -73,17 +81,19 @@ R1=full(R);
 %end
 %W=W'+tril(W,-1);
 
-
+toc  # 1
 k_sim_k_dis=R1*R1';
 R1a=abs(R1);     
 SNP_shared_mat=R1a*R1a'; %omeg=find(SNP_shared_mat)
 W=k_sim_k_dis./SNP_shared_mat;
 W(isnan(W))=0;
+toc # 2
 
 
-toc #1
 X=sdp_solver(-W);
-toc  #2
+
+toc #3 after     breakyes ..
+
 [Q, sig]=eig(X);
 [val_eig, idx]=sort(diag(sig), 'descend'); % ascend[1,2,3]  descend [2,3,1]
 three_ind_largest=idx(1:K); % sometimes  the third is zero
@@ -94,7 +104,7 @@ V=Q(:,three_ind_largest)*sqrt(sig(three_ind_largest,three_ind_largest));
 
 %V_arch=V;
 
-toc #3
+toc # 4 
 object_all=[];
 indx_all=[];
  num_it=50*floor(log2(N));
@@ -115,7 +125,7 @@ for ii=1:num_it
     object_all=[object_all; trace(W*X_estimated)  ];
     indx_all=[indx_all;index];
 end
-
+toc
 [~,i_best]=max(object_all);
 index_best=indx_all(i_best,:);
 
@@ -133,9 +143,9 @@ end
 % % % % %%% greedy refinement
 H_new=2*H-1;
 
-toc #4
+toc
 H_final=refiner(R,H_new);
-toc #5
+toc
 mec_final=mec_calculator(R,H_final);
 
 
@@ -158,6 +168,6 @@ else
     fprintf(' The number of reads or SNPs is not enough. At least three (proper) reads and two SNPs.  \n')
     H_final=0;
 end
+toc
 
-
-end
+%end
