@@ -4,7 +4,7 @@ function mec=mec_calculator(R_matrix,H_candidate)
 
 % R {+1,-1,0}   h {1,-1}
 N=size(R_matrix,1);
-[K, L]=size(H_candidate); % K rows , Kploidy level
+[K, ~]=size(H_candidate); % K rows , Kploidy level
 
 mec=0;
 for i=1:N

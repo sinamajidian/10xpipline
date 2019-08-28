@@ -8,21 +8,21 @@ sdhap='/mnt/LTR_userdata/majid001/software/sdhap/hap_poly'
 split_molec='/mnt/LTR_userdata/majid001/software/code_py/split_v3b.py'
 
 
-cd $1  &&
-mkdir pre12; cd pre12 &&
+#cd $1  &&
+#mkdir pre12; cd pre12 &&
 
-cp ../frb/frag.txt . &&
-cp ../frb/pos_freebayes.txt . &&
-python3 $split_molec frag.txt pos_freebayes.txt 50   &&
-python2 $fragpoly -f frag_sp.txt  -o frag_sd.txt -x SDhaP  &&
+#cp ../frb/frag.txt . &&
+#cp ../frb/pos_freebayes.txt . &&
+#python3 $split_molec frag.txt pos_freebayes.txt 50   &&
+#python2 $fragpoly -f frag_sp.txt  -o frag_sd.txt -x SDhaP  &&
 
-$cc_extr frag_sd.txt out_test 3           &&  # extracting connected componnets (part of sdhap code )
-csplit --quiet -z connected_dic.txt -f cc -n 1 /block/ {*}  &&
-cc_num=$(ls | grep "cc" | wc -l)
+#$cc_extr frag_sd.txt out_test 4           &&  # extracting connected componnets (part of sdhap code )
+#csplit --quiet -z connected_dic.txt -f cc -n 1 /block/ {*}  &&
+#cc_num=$(ls | grep "cc" | wc -l)
 
 #for (( i=(($cc_num-1)); i>=0; i--)); do  
-for (( i=0; i<$cc_num; i++)); do
-    mkdir ${i}; cd ${i} &&
+for (( i=0; i<40; i++)); do # (( i=0; i<$cc_num; i++));
+    (mkdir ${i}; cd ${i} &&
     mv ../cc${i} . &&
     grep -v "block" cc${i} >  cc${i}_pure &&
     awk 'NR == FNR{a[$0]; next};FNR in a' cc${i}_pure ../frag_sp.txt > frag${i}.txt 
@@ -55,7 +55,8 @@ for (( i=0; i<$cc_num; i++)); do
         fi
         
     done
-    cd ..
+    ) &
+    #cd ..
 done
 
 wait

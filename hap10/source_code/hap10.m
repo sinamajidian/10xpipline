@@ -1,7 +1,11 @@
 % solving
 %clearvars
-%i=0;j=2;
-%fragment_file=strcat('data/5m_.001_1_cov5/',num2str(i),'/frag',num2str(i),'_',num2str(j),'.txt')
+
+
+
+%fragment_file='/mnt/LTR_userdata/majid001/nobackup/1m/1m01/1_c5/hap10_2/0/frag0_1.txt'
+%K=3;
+
 
 function H_final=hap10(fragment_file,K)
 
@@ -18,11 +22,11 @@ size(R)
 
 if mean(cov)>15 && N>9000
 min_allele_row=3;
-min_cov=4;
+min_cov=3;
 
 else
 min_allele_row=2;
-min_cov=2;
+min_cov=0;
 end
 
 
@@ -52,27 +56,12 @@ N=size(R,1);
 l=size(R,2);
 
 
-if (N>2 && l>1)
+if (N>2 && l>3)
 
 %W=zeros(N,N);
 %diag_const=0;
 %W(1,1)=diag_const;
 R1=full(R);
-%for i=2:N
-    %line_i=R1(i,:);
-    %W(i,i)=diag_const;
-    %for j=1:(i-1)
-        %line_j=R1(j,:);
-        %SNP_shared=sum( (line_i~=0) & (line_j~=0));
-        %#allele_shared=sum( line_i.*line_j); # wrong 
-        %allele_shared=sum( (line_i.*line_j)==1); 
-        %if SNP_shared>0
-            %W(i,j)=(2*allele_shared-SNP_shared)/SNP_shared;
-        %end
-    %end
-%end
-%W=W'+tril(W,-1);
-
 
 k_sim_k_dis=R1*R1';
 R1a=abs(R1);     
@@ -81,9 +70,9 @@ W=k_sim_k_dis./SNP_shared_mat;
 W(isnan(W))=0;
 
 
-toc #1
+toc %1
 X=sdp_solver(-W);
-toc  #2
+toc  %2
 [Q, sig]=eig(X);
 [val_eig, idx]=sort(diag(sig), 'descend'); % ascend[1,2,3]  descend [2,3,1]
 three_ind_largest=idx(1:K); % sometimes  the third is zero
@@ -94,48 +83,47 @@ V=Q(:,three_ind_largest)*sqrt(sig(three_ind_largest,three_ind_largest));
 
 %V_arch=V;
 
-toc #3
-object_all=[];
-indx_all=[];
- num_it=50*floor(log2(N));
+toc %3
+
+
+num_it=1000*floor(log10(N)); % 100
+object_all=zeros(num_it,1);
+indx_all=zeros(num_it,N);
+    W_sp=sparse(W);
 for ii=1:num_it
-    Z=normrnd(0,1,[K,K]); %Z=normalize(Z);
+    Z=normrnd(0,1,[K,K]); 
     VZ=V*Z;
     [~, index]=max(VZ'); % no max(VZ,[],2);
-    %X_estimated=ones(N,N);
-    %for i=1:N
-        %for j=1:N
-            %if index(i)~=index(j)
-                %X_estimated(i,j)=-1;
-            %end
-        %end
-    %end
     index_mat=repmat(index,N,1);
-    X_estimated=2*(index_mat==index_mat')-1;
-    object_all=[object_all; trace(W*X_estimated)  ];
-    indx_all=[indx_all;index];
+    X_estimated=2*(index_mat==index_mat')-1;    
+    object_all(ii)= W_sp(:).'*reshape(X_estimated.',[],1); %trace(W_sp*X_estimated);
+    indx_all(ii,:)=index;
 end
-
 [~,i_best]=max(object_all);
 index_best=indx_all(i_best,:);
 
 
 R=full(R);
-H=zeros(K,l);
+H_b=zeros(K,l);
+HQ=zeros(K,l);
+
 
 for i_k=1:K
-   R(index_best==i_k,:);
-   H(i_k,:)=sum(R(index_best==i_k,:))>0;
+  % R(index_best==i_k,:);
+   value=sum(R(index_best==i_k,:));
+   H_b(i_k,:)=value>0;
+   HQ(i_k,:)=abs(value);
 end
+H_one=2*H_b-1;
 
 
 
 % % % % %%% greedy refinement
-H_new=2*H-1;
+H_new=H_one;
 
-toc #4
+toc %4
 H_final=refiner(R,H_new);
-toc #5
+toc %5
 mec_final=mec_calculator(R,H_final);
 
 
